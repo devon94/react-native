@@ -92,7 +92,9 @@ RCT_EXPORT_MODULE()
   if (_dismissalBlock) {
     _dismissalBlock([modalHostView reactViewController], viewController, animated, nil);
   } else {
-    [viewController.presentingViewController dismissViewControllerAnimated:animated completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [viewController.presentingViewController dismissViewControllerAnimated:animated completion:nil];
+    });
   }
 }
 
